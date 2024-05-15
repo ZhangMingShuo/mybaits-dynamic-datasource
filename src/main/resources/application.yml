@@ -1,0 +1,69 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  # undertow 配置
+  undertow:
+    # HTTP post内容的最大大小。当值为-1时，默认值为大小是无限的
+    max-http-post-size: -1
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 512
+    # 是否分配的直接内存
+    direct-buffers: true
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 8
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 256
+
+base:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    db: 0
+  db:
+    url: jdbc:mysql://127.0.0.1:3306/tenant?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    pwd: 0c0bb39488e6dbfb
+
+
+spring:
+  datasource:
+    dynamic:
+      primary: 0
+      strict: true
+      hikari:
+        connection-timeout: 30000
+        max-pool-size: 10
+        min-idle: 5
+        idle-timeout: 180000
+        max-lifetime: 1800000
+        connection-test-query: SELECT 1
+      datasource:
+        0:
+          url: ${base.db.url}
+          username: ${base.db.username}
+          password: ${base.db.pwd}
+          driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    use-generated-keys: true
+    default-executor-type: simple
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+  mapperLocations: classpath*:mapper/*Mapper.xml
+  typeAliasesPackage: com.simple.mybaitsdynamicdatasource.infrastructure.db.entity
+  type-aliases-package: ${application.base-package}.entity
+  global-config:
+    db-config:
+      logic-delete-field: is_deleted
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+
+logging:
+  level:
+    org.springframework: warn
