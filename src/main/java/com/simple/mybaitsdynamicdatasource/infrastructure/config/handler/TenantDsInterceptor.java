@@ -32,10 +32,10 @@ public class TenantDsInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         //todo 从请求中获取租户ID
-        String tenantId = "1";
-        TenantContext.setTenant(tenantId);
+//        String tenantId = "1";
+//        TenantContext.setTenant(tenantId);
         //根据tenantId切换数据源
-        tenantDsService.changeDsByTenantId(tenantId);
+//        tenantDsService.changeDsByTenantId(tenantId);
         return true;
     }
 

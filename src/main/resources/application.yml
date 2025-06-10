@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8180
   servlet:
     context-path: /
   # undertow 配置
@@ -20,12 +20,12 @@ base:
   redis:
     host: 127.0.0.1
     port: 6379
-    password: 123456
-    db: 0
+    password: NFTurbo666
+    db: 1
   db:
-    url: jdbc:mysql://127.0.0.1:3306/tenant?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.192.1:3306/tenant?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
-    pwd: 0c0bb39488e6dbfb
+    pwd: 'root'
 
 
 spring:

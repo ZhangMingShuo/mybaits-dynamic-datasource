@@ -1,3 +1,8 @@
+create database tenant;
+create database `tenant-one`;
+create database `tenant-two`;
+use tenant;
+
 CREATE TABLE `tenant` (
                           `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
                           `tenant_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '租户名称',
